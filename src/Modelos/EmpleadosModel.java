@@ -16,10 +16,11 @@ public DefaultTableModel ListarDatos()
     TablaModelo.setRowCount(0);
     TablaModelo.setColumnCount(0);
     
-        TablaModelo.addColumn("idEmpleados");
+        
         TablaModelo.addColumn("Apellidos");
         TablaModelo.addColumn("Nombres");
         TablaModelo.addColumn("Telefono");
+        TablaModelo.addColumn("idEmpleado");
 
 
     try
@@ -27,15 +28,16 @@ public DefaultTableModel ListarDatos()
         Conexion nuevaConexion = new Conexion();
         MyConexion = nuevaConexion.Conectar();
         Statement sentencia = MyConexion.createStatement();
-        result = sentencia.executeQuery("select * from Empleados");
+        result = sentencia.executeQuery("select * from Empleados4");
         
         
             while(result.next())
             {
-                TablaModelo.addRow(new Object[]{result.getInt("idEmpleados"),
+                TablaModelo.addRow(new Object[]{
                 result.getString("Apellidos"),
                 result.getString("Nombres"),
-                result.getString("Telefono")});
+                result.getString("Telefono"),
+                result.getInt("idEmpleado")});
             }
         return TablaModelo;
     }
@@ -55,7 +57,7 @@ public void Actualizar(int codigo, String Apellidos, String Nombre, String telef
           Conexion nuevaConexion = new Conexion();
         MyConexion = nuevaConexion.Conectar();
         Statement sentencia = MyConexion.createStatement();
-        sentencia.executeQuery("Update Empleados set Apellidos ="+"'"+Apellidos+"',Nombres="+"'"+Nombre+"',Telefono="+"'"+telefono+"' where idEmpleados="+"'"+codigo+"'");
+        sentencia.executeQuery("Update Empleados4 set Apellidos ="+"'"+Apellidos+"',Nombres="+"'"+Nombre+"',Telefono="+"'"+telefono+"' where idEmpleado="+"'"+codigo+"'");
         }
         catch(SQLException ex)
         {
@@ -71,7 +73,7 @@ public void Guardar(int codigo, String Apellidos, String Nombres, String Telefon
           Conexion nuevaConexion = new Conexion();
         MyConexion = nuevaConexion.Conectar();
         Statement sentencia = MyConexion.createStatement();
-        sentencia.executeQuery("Insert into Empleados values("+"'"+Apellidos+"',"+"'"+Nombres+"',"+"'"+Telefono+"',"+"'"+codigo+"')");
+        sentencia.executeQuery("Insert into Empleados4 values("+"'"+Apellidos+"',"+"'"+Nombres+"',"+"'"+Telefono+"',"+"'"+codigo+"')");
         }
         catch(SQLException ex)
         {

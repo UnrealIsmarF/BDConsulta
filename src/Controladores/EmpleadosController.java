@@ -94,16 +94,16 @@ public class EmpleadosController implements ActionListener, MouseListener{
         if(arg0.getSource()==this.VistaEmpleados.jtbEmpleados)
         {
             fila = this.VistaEmpleados.jtbEmpleados.getSelectedRow();
-            this.VistaEmpleados.txtCodigo.setText(this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 0).toString());
+            this.VistaEmpleados.txtApellidos.setText(this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 0).toString());
             
             fila = this.VistaEmpleados.jtbEmpleados.getSelectedRow();
-            this.VistaEmpleados.txtApellidos.setText(this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 1).toString());
+            this.VistaEmpleados.txtNombre.setText(this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 1).toString());
             
             fila = this.VistaEmpleados.jtbEmpleados.getSelectedRow();
-            this.VistaEmpleados.txtNombre.setText(this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 2).toString());
+            this.VistaEmpleados.txtTelefono.setText(this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 2).toString());
             
             fila = this.VistaEmpleados.jtbEmpleados.getSelectedRow();
-            this.VistaEmpleados.txtTelefono.setText(this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 3).toString());
+            this.VistaEmpleados.txtCodigo.setText(this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 3).toString());
         }
     }
 
