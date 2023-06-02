@@ -15,25 +15,30 @@ import javax.swing.table.DefaultTableModel;
  * @author umg
  */
 public class EmpleadosController implements ActionListener, MouseListener{
- frmEmpleados VistaEmpleados;
  frmPrincipal VistaPrincipal;
+ frmEmpleados VistaEmpleados;
+  frmConsulta VistaConsulta;
+ 
  EmpleadosModel ModeloEmpleado;
  
     
 
-    public EmpleadosController(frmEmpleados VistaEmpleados, frmPrincipal VistaPrincipal, EmpleadosModel ModeloEmpleado) {
-        this.VistaEmpleados = VistaEmpleados;
+    public EmpleadosController( frmPrincipal VistaPrincipal, frmEmpleados VistaEmpleados,frmConsulta VistaConsulta,EmpleadosModel ModeloEmpleado) {
         this.VistaPrincipal = VistaPrincipal;
+        this.VistaEmpleados = VistaEmpleados;
+        this.VistaConsulta = VistaConsulta;
         this.ModeloEmpleado = ModeloEmpleado;
         
         /*LEVANTAR LAS VISTAS*/
-      this.VistaPrincipal.setExtendedState(frmPrincipal.MAXIMIZED_BOTH);
-      this.VistaPrincipal.setVisible(true);
+      
       
       /*PONER A LA ESCUCHA LOS BOTONES*/
       this.VistaEmpleados.btn_Agregar.addActionListener(this);
       this.VistaEmpleados.btn_Editar.addActionListener(this);
       this.VistaEmpleados.btnEliminar.addActionListener(this);
+      this.VistaPrincipal.opIngresar.addActionListener(this);
+      this.VistaPrincipal.opcConsulta.addActionListener(this);
+      this.VistaConsulta.btnEjecutar.addActionListener(this);
         
       /*REALIZAR LA CONEXION*/
             
@@ -54,6 +59,7 @@ public class EmpleadosController implements ActionListener, MouseListener{
 
                 DefaultTableModel TablaModelo = this.ModeloEmpleado.ListarDatos();
                 this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);
+                
                    
             //PASAR EL MODELO CREADO A LA TABLA DE LA VISTA EMPLEADOS        
                     this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);
@@ -62,29 +68,56 @@ public class EmpleadosController implements ActionListener, MouseListener{
             this.VistaEmpleados.jtbEmpleados.addMouseListener(this);
         
         /*LEVANTAR LA VISTA EMPLEADOR*/
-      this.VistaEmpleados.setLocationRelativeTo(null);
-      this.VistaEmpleados.setVisible(true);
+      this.VistaPrincipal.setExtendedState(frmPrincipal.MAXIMIZED_BOTH);
+      this.VistaPrincipal.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == this.VistaPrincipal.opIngresar)
+        {
+            this.VistaEmpleados.setLocationRelativeTo(null);
+            this.VistaEmpleados.setVisible(true);
+        }
+        if(e.getSource() == this.VistaPrincipal.opcConsulta)
+        {
+            this.VistaConsulta.setLocationRelativeTo(null);
+            this.VistaConsulta.setVisible(true);
+        }
+        if(e.getSource() == this.VistaConsulta.btnEjecutar)
+        {
+            DefaultTableModel TablaModelo2 = this.ModeloEmpleado.ListarDatosConsulta(this.VistaConsulta.txtConsulta.getText());
+                this.VistaConsulta.tablaConsulta.setModel(TablaModelo2);
+        }
+        
         if(e.getSource() == this.VistaEmpleados.btn_Editar)
         {
             this.ModeloEmpleado.Actualizar(Integer.parseInt(this.VistaEmpleados.txtCodigo.getText()),
-                this.VistaEmpleados.txtApellidos.getText(),
+                    this.VistaEmpleados.txtApellidos.getText(),
                     this.VistaEmpleados.txtNombre.getText(), this.VistaEmpleados.txtTelefono.getText());
 
             DefaultTableModel TablaModelo = this.ModeloEmpleado.ListarDatos();
             this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);
         }
-        if(e.getSource() == this.VistaEmpleados.btn_Agregar)
-        {
+        if (e.getSource() == this.VistaEmpleados.btn_Agregar) {
             this.ModeloEmpleado.Guardar(Integer.parseInt(this.VistaEmpleados.txtCodigo.getText()),
-                this.VistaEmpleados.txtApellidos.getText(),
+                    this.VistaEmpleados.txtApellidos.getText(),
                     this.VistaEmpleados.txtNombre.getText(), this.VistaEmpleados.txtTelefono.getText());
-                            
+
             DefaultTableModel TablaModelo = this.ModeloEmpleado.ListarDatos();
             this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);
+        }
+        if (e.getSource() == this.VistaEmpleados.btnEliminar) {
+            this.ModeloEmpleado.Eliminar(Integer.parseInt(this.VistaEmpleados.txtCodigo.getText()),
+                    this.VistaEmpleados.txtApellidos.getText(),
+                    this.VistaEmpleados.txtNombre.getText(), this.VistaEmpleados.txtTelefono.getText());
+            DefaultTableModel TablaModelo = this.ModeloEmpleado.ListarDatos();
+            this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);
+
+            this.VistaEmpleados.txtCodigo.setText("");
+            this.VistaEmpleados.txtApellidos.setText("");
+            this.VistaEmpleados.txtNombre.setText("");
+            this.VistaEmpleados.txtTelefono.setText("");
         }
     }
 

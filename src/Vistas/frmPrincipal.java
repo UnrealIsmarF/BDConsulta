@@ -27,7 +27,38 @@ public class frmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        opIngresar = new javax.swing.JMenuItem();
+        opcConsulta = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jMenu1.setText("Menu");
+
+        opIngresar.setText("Ingresar Datos");
+        opIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opIngresarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(opIngresar);
+
+        opcConsulta.setText("Consulta");
+        opcConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opcConsultaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(opcConsulta);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -37,11 +68,19 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 278, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void opIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opIngresarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opIngresarActionPerformed
+
+    private void opcConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcConsultaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opcConsultaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +118,10 @@ public class frmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    public javax.swing.JMenuItem opIngresar;
+    public javax.swing.JMenuItem opcConsulta;
     // End of variables declaration//GEN-END:variables
 }
